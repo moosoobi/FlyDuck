@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 08ef06b3eb990f048992fe3f86b03197
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - EASTARJET
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 26af1e9e049e02044861b0ad7b103890, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
