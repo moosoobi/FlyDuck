@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -121,7 +121,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: "\uBC1C\uD3102-removebg-preview (1)_0"
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 218
+        width: 292
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c70607c8c9fa99345ad94ade9326c233
+      internalID: -441849848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\uBC1C\uD3102-removebg-preview (1)_1"
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 155
+        width: 129
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07fa2d13ce1571f4eb51e09beafaf6d5
+      internalID: 150388292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\uBC1C\uD3102-removebg-preview (1)_2"
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 43
+        width: 214
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6943c086bdba30b45b7c6b94c4f4e555
+      internalID: -376042648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\uBC1C\uD3102-removebg-preview (1)_3"
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 48
+        width: 324
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03f5ef4123ce27d4d8afb2f858fa7ad5
+      internalID: -1355022866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -132,7 +216,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "\uBC1C\uD3102-removebg-preview (1)_0": -441849848
+      "\uBC1C\uD3102-removebg-preview (1)_1": 150388292
+      "\uBC1C\uD3102-removebg-preview (1)_2": -376042648
+      "\uBC1C\uD3102-removebg-preview (1)_3": -1355022866
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

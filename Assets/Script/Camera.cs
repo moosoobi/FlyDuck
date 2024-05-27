@@ -16,9 +16,8 @@ public class Camera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         if(stage==1){
-             Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-
             if (player.transform.position.y > -49f)
             {
                 newPosition.y = -26f;
@@ -26,12 +25,9 @@ public class Camera : MonoBehaviour
             else
             {
                 newPosition.y = -75f;
-            }
-
-            transform.position = newPosition;
-        }if(stage==2){
-            Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-
+            } 
+        }
+        if(stage==2){
             if (player.transform.position.y > 30f)
             {
                 newPosition.y = 60f;
@@ -39,9 +35,49 @@ public class Camera : MonoBehaviour
             else
             {
                 newPosition.y = 0f;
-            }
-
-            transform.position = newPosition;
+            }        
         }
+        if(stage==3){
+            if (player.transform.position.x > 55f)
+            {
+                newPosition.x = 107f;
+            }
+            else
+            {
+                newPosition.x = 0f;
+            }        
+        }
+        if(stage==4){
+            if (player.transform.position.y > -32f)
+            {
+                newPosition.y = -7f;
+            }
+            else
+            {
+                newPosition.y = -64f;
+            }        
+        }
+        if(stage==5){
+            if (player.transform.position.y > -65f)
+            {
+                newPosition.y = -30f;
+            }
+            else
+            {
+                newPosition.y = -92f;
+            }        
+        }
+        if(stage==6){
+            if (player.transform.position.y > -45f)
+            {
+                newPosition.y = -12f;
+            }
+            else
+            {
+                newPosition.y = -72f;
+            }        
+        }
+        
+        transform.position = newPosition;
     }
 }

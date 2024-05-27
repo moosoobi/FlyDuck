@@ -11,15 +11,16 @@ public class JumpKing : MonoBehaviour
     private float speakDuration;
     private float[] samples;
     private int sampleRate=44100;
-    private int sensitive=10;
     private bool isSpeaking = false;
     private bool isWalking=false;
+    private bool isHitting=false;
     private bool first=true;
+    private bool second=true;
     private bool groundBool=true;
-    private bool pressed=false;
     private AudioSource audioSource;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+    private Vector2 firstPosition;
 
     public AudioClip aud;
     public Animator Duck;
@@ -28,9 +29,9 @@ public class JumpKing : MonoBehaviour
     public Slider settingSlider;
     public GameObject player;
     public GameObject Arrow;
-    public TextMeshProUGUI Mouse;
 
     public bool IsGrounded=false;
+    public bool hitbool=false;
     public float rmsValue;
     public float modulate;
     public int maxValue;
@@ -38,13 +39,15 @@ public class JumpKing : MonoBehaviour
     public int cutValue;
     public int speed;
     public int movingSpeed;
-    public int stage;
-    
+    public int fallInt;
+    public int leftInt;
+    public int rightInt;
 
 
 
     void Start()
     {
+        firstPosition=transform.position;
         samples= new float[sampleRate];
         aud=Microphone.Start(Microphone.devices[0].ToString(),true,1,sampleRate);
         rb = GetComponent<Rigidbody2D>();
@@ -56,79 +59,31 @@ public class JumpKing : MonoBehaviour
     {
         //if(settingSlider.gameObject.activeSelf){modulate=settingSlider.value;Debug.Log(1);}
         
-        /*
-        //감도조절
-        if ((Input.GetKeyDown(KeyCode.Equals) || Input.GetKeyDown(KeyCode.KeypadPlus)) && !pressed) // "+" 키를 누르고 있는지 확인
-        {
-            if (currentCoroutine != null)
-            {
-                StopCoroutine(currentCoroutine);
-            }
-            sensitive++;
-            modulate+=100
-
-            Mouse.text = "마우스감도:" + sensitive.ToString();
-            Mouse.gameObject.SetActive(true);
-            currentCoroutine = StartCoroutine(MouseText(2.0f));
-            pressed = true;
-        }
-        else if ((Input.GetKeyUp(KeyCode.Equals) || Input.GetKeyUp(KeyCode.KeypadPlus)) && pressed) // "+" 키를 뗐는지 확인
-        {
-            pressed = false;
-        }
-
-        if ((Input.GetKeyDown(KeyCode.Minus) || Input.GetKeyDown(KeyCode.KeypadMinus)) && pressed) // "-" 키를 누르고 있는지 확인
-        {
-            if (currentCoroutine != null)
-            {
-                StopCoroutine(currentCoroutine);
-            }
-           
-            Mouse.text = "마우스감도:" + sensitive.ToString();
-            Mouse.gameObject.SetActive(true);
-            currentCoroutine = StartCoroutine(MouseText(2.0f));
-            pressed = false;
-            
-        }
-        else if ((Input.GetKeyUp(KeyCode.Minus) || Input.GetKeyUp(KeyCode.KeypadMinus)) && !pressed) // "-" 키를 뗐는지 확인
-        {
-            pressed = true;
-        }
-        */
         //공간 제한
         if(groundBool){
             RayCastGrounded();
         }
-        if(stage==1){
-            Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-
-            if (player.transform.position.x > 270f)
-            {
-                newPosition.x = 270f;
-            }
-            if (player.transform.position.x < 170f)
-            {
-                newPosition.x = 170f;
-            }
-
-            transform.position = newPosition;
-        }if(stage==2){
-            Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-
-            if (player.transform.position.x > 50f)
-            {
-                newPosition.x = 50f;
-            }
-            if (player.transform.position.x < -50f)
-            {
-                newPosition.x = -50f;
-            }
-
-            transform.position = newPosition;
+    
+        Vector2 newPosition = rb.velocity;
+        if (player.transform.position.x > rightInt)
+        {
+            newPosition.x = 0;
+        }
+        if (player.transform.position.x < leftInt)
+        {
+            newPosition.x = 0;
         }
 
+        rb.velocity = newPosition;
+        
+        if(hitbool){
+            hitbool=false;
+            isHitting=true;
+            StartCoroutine(hitting());
+        }
         //이동
-        if(IsGrounded&&!isSpeaking){
+        
+        if(IsGrounded&&!isSpeaking&&!isHitting){
             if (Input.GetKey(KeyCode.A))
             {
                 if(isWalking==false){
@@ -155,7 +110,7 @@ public class JumpKing : MonoBehaviour
                 isWalking=false;
                 rb.velocity = new Vector2(0, rb.velocity.y);
             }
-        }else if(first){
+        }else if(first&&!isHitting){
             first=false;
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
@@ -207,21 +162,27 @@ public class JumpKing : MonoBehaviour
             StartCoroutine(groundBool1());
         }
         if(IsGrounded&&!isWalking){Duck.Play("Idle", 0, 0.0f);}
+        if(transform.position.y<fallInt&&second){
+            second=false;
+            BackFirst();
+        }
+        
     }
-
+    public void BackFirst(){
+        transform.position=firstPosition;
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+        second=true;
+    }
     //땅 검사
     public void RayCastGrounded(){
         Vector2 currentPosition = transform.position;
 
-        Vector2 rightPosition = new Vector2(currentPosition.x + 3f, currentPosition.y);
+        Vector2 rightPosition = new Vector2(currentPosition.x + 2f, currentPosition.y);
 
-        Vector2 leftPosition = new Vector2(currentPosition.x - 3f, currentPosition.y);
+        Vector2 leftPosition = new Vector2(currentPosition.x - 2f, currentPosition.y);
 
-        RaycastHit2D groundedInfo1 = Physics2D.Raycast(rightPosition, Vector2.down, 3f);
-        RaycastHit2D groundedInfo2 = Physics2D.Raycast(leftPosition, Vector2.down, 3f);
-
-        Debug.DrawRay(rightPosition, Vector2.down * 1f, Color.red, 3f);
-        Debug.DrawRay(leftPosition, Vector2.down * 1f, Color.red, 3f);
+        RaycastHit2D groundedInfo1 = Physics2D.Raycast(rightPosition, Vector2.down, 5f);
+        RaycastHit2D groundedInfo2 = Physics2D.Raycast(leftPosition, Vector2.down, 5f);
         
         if(groundedInfo1.collider != null||groundedInfo2.collider != null){
             IsGrounded=true;
@@ -235,9 +196,15 @@ public class JumpKing : MonoBehaviour
         groundBool=true;
     }
 
+    public IEnumerator hitting(){
+        isHitting=true;
+        GetComponent<SpriteRenderer>().color=new Color32(255,60,60,255);
+        yield return new WaitForSeconds(1.0f);
+        GetComponent<SpriteRenderer>().color=new Color32(255,255,255,255);
+        isHitting=false;
+    }
 
-    private IEnumerator MouseText(float delayInSeconds){
-	    yield return new WaitForSeconds(delayInSeconds);
-	    Mouse.gameObject.SetActive(false);
+    public bool ifflipX(){
+        return spriteRenderer.flipX;
     }
 }
