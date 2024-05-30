@@ -4,31 +4,45 @@ using UnityEngine;
 
 public class Fish : MonoBehaviour
 {
-    public float speed = 2.0f; // 이동 속도
-    public float minX = -50f;  // 최소 x 값
-    public float maxX = 50f;   // 최대 x 값
+    
 
-    private SpriteRenderer spriteRenderer;
-    private float startX;
-    private float preX;
-    private float curX;
+    public GameObject fishPrefab;
+    public Transform[] spawnTransform;
+    public float[] spawnTime;
+  
 
 
     void Start()
     {
-        spriteRenderer=GetComponent<SpriteRenderer>(); 
-        startX = transform.position.x;
+        InvokeRepeating("SpawnFish1", 0f, spawnTime[0]);
+        InvokeRepeating("SpawnFish2", 0f, spawnTime[1]);
+        InvokeRepeating("SpawnFish3", 0f, spawnTime[2]);
+        InvokeRepeating("SpawnFish4", 0f, spawnTime[3]);
     }
 
-    void Update()
-    {
-        
-        curX=Mathf.PingPong(Time.time * speed, maxX - minX);
-        if(curX>preX){spriteRenderer.flipX = true;}
-        else{spriteRenderer.flipX = false;}
-
-        float x = Mathf.PingPong(Time.time * speed, maxX - minX) + minX;
-        transform.position = new Vector3(x, transform.position.y, transform.position.z);
-        preX=Mathf.PingPong(Time.time * speed, maxX - minX);
+    public void SpawnFish1(){
+        GameObject fish1=Instantiate(fishPrefab, spawnTransform[0].position, spawnTransform[0].rotation);
+        fish1.GetComponent<Rigidbody2D>().AddForce(spawnTransform[0].right *1800);
+        StartCoroutine(InvokeAfter(fish1));
     }
+    public void SpawnFish2(){
+        GameObject fish2=Instantiate(fishPrefab, spawnTransform[1].position, spawnTransform[1].rotation);
+        fish2.GetComponent<Rigidbody2D>().AddForce(spawnTransform[1].right *1000);
+        StartCoroutine(InvokeAfter(fish2));
+    }
+    public void SpawnFish3(){
+        GameObject fish3=Instantiate(fishPrefab, spawnTransform[2].position, spawnTransform[2].rotation);
+        fish3.GetComponent<Rigidbody2D>().AddForce(spawnTransform[2].right *3000);
+        StartCoroutine(InvokeAfter(fish3));
+    }
+    public void SpawnFish4(){
+        GameObject fish4=Instantiate(fishPrefab, spawnTransform[3].position, spawnTransform[3].rotation);
+        fish4.GetComponent<Rigidbody2D>().AddForce(spawnTransform[3].right *1000);
+        StartCoroutine(InvokeAfter(fish4));
+    }
+    private IEnumerator InvokeAfter(GameObject fishObj){
+        yield return new WaitForSeconds(5f);
+        Destroy(fishObj);
+    }
+
 }

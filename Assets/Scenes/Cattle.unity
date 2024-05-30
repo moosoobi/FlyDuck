@@ -4254,7 +4254,6 @@ MonoBehaviour:
   settingSlider: {fileID: 1970499870}
   player: {fileID: 1413904119}
   Arrow: {fileID: 974074593}
-  Mouse: {fileID: 0}
   IsGrounded: 0
   hitbool: 0
   rmsValue: 100
@@ -4264,7 +4263,6 @@ MonoBehaviour:
   cutValue: 15
   speed: 30
   movingSpeed: 10
-  stage: 1
   fallInt: -105
   leftInt: 160
   rightInt: 280
