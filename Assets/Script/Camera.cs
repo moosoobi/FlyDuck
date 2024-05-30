@@ -28,13 +28,13 @@ public class Camera : MonoBehaviour
             } 
         }
         if(stage==2){
-            if (player.transform.position.y > 30f)
+            if (player.transform.position.y > -42f)
             {
-                newPosition.y = 60f;
+                newPosition.y = -11f;
             }
             else
             {
-                newPosition.y = 0f;
+                newPosition.y = -70f;
             }        
         }
         if(stage==3){
