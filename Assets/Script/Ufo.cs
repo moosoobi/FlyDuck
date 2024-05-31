@@ -2,29 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bug : MonoBehaviour
+public class Ufo : MonoBehaviour
 {
+    public float pushForce = 10f; // 플레이어를 밀어내는 힘의 크기
     private bool first=true;
 
-    public float pushForce = 10f; // 플레이어를 밀어내는 힘의 크기
-    public float speed = 2.0f; // 이동 속도
-    public bool ifdown=true;
-
-
-
-
-    void Update()
-    {
-        
-
-
-        Vector3 curtrans=transform.position;
-        if(ifdown){curtrans.y-=0.03f;}
-        else{curtrans.y+=0.03f;}
-        
-        transform.position = curtrans;
-        
-    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player")&&first)
