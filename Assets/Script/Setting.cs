@@ -43,6 +43,7 @@ public class Setting : MonoBehaviour
             resultValue=0;
         }
         modulate=slider.value;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<JumpKing>().modulate=slider.value;
         if(resultValue==0){fill.SetActive(false);}
         else{fill.SetActive(true);}
         bar.value=resultValue;

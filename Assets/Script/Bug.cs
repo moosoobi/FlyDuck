@@ -13,18 +13,6 @@ public class Bug : MonoBehaviour
 
 
 
-    void Update()
-    {
-        
-
-
-        Vector3 curtrans=transform.position;
-        if(ifdown){curtrans.y-=0.03f;}
-        else{curtrans.y+=0.03f;}
-        
-        transform.position = curtrans;
-        
-    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player")&&first)

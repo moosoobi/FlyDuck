@@ -5010,7 +5010,6 @@ MonoBehaviour:
   settingSlider: {fileID: 217923126}
   player: {fileID: 1484118062}
   Arrow: {fileID: 1892601252}
-  Mouse: {fileID: 0}
   IsGrounded: 0
   hitbool: 0
   rmsValue: 100

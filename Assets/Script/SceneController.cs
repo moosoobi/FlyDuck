@@ -35,6 +35,7 @@ public class SceneController : MonoBehaviour
     }
     public void MiniDetailOn(){
         MiniOff();
+        slider.value=GameObject.FindGameObjectWithTag("Player").GetComponent<JumpKing>().modulate;
         setting.GetComponent<Setting>().aud=Microphone.Start(Microphone.devices[0].ToString(),true,1,44100);
         MiniDetail.SetActive(true);
     }
@@ -53,8 +54,8 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene("Farm");
     }
     public void Quit(){
-        UnityEditor.EditorApplication.isPlaying = false;
-        //Application.Quit(); 빌드파일일때
+        //UnityEditor.EditorApplication.isPlaying = false;
+        Application.Quit();
     }
     void OnTriggerEnter2D(Collider2D other)
     {
