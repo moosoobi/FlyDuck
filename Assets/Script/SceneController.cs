@@ -13,6 +13,7 @@ public class SceneController : MonoBehaviour
     public GameObject MiniDetail;
     public GameObject player;
     public GameObject setting;
+    public AudioSource Portal;
     public string nextScene;
 
     void Start()
@@ -60,6 +61,7 @@ public class SceneController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.name=="Player"){
+            Portal.Play();
             myFloatValue=slider.value;
             PlayerPrefs.SetFloat("myFloat", myFloatValue);
             PlayerPrefs.Save();

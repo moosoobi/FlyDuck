@@ -6,11 +6,13 @@ public class CattleArrow : MonoBehaviour
 {
     public GameObject arrowPrefab;
     public Transform[] spawnTransform;
+    public AudioSource arrowsound;
     void Start()
     {
         InvokeRepeating("SpawnArrow", 0f, 5.0f);
     }
     public void SpawnArrow(){
+        arrowsound.Play();
         int i=Random.Range(0, 6);
         GameObject arrow1=Instantiate(arrowPrefab, spawnTransform[i].position, spawnTransform[i].rotation);
         StartCoroutine(InvokeAfter(arrow1));

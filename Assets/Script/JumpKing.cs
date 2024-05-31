@@ -25,6 +25,7 @@ public class JumpKing : MonoBehaviour
     public AudioClip aud;
     public Animator Duck;
     public AudioSource Duck1;
+    public AudioSource hittingSound;
     public Slider slider;
     public Slider settingSlider;
     public GameObject player;
@@ -197,6 +198,7 @@ public class JumpKing : MonoBehaviour
     }
 
     public IEnumerator hitting(){
+        hittingSound.Play();
         isHitting=true;
         GetComponent<SpriteRenderer>().color=new Color32(255,60,60,255);
         yield return new WaitForSeconds(1.0f);

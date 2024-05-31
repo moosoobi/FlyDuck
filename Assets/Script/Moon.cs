@@ -10,6 +10,7 @@ public class Moon : MonoBehaviour
     public float minScale = 1.0f; // 최소 크기
     public float maxScale = 2.0f; // 최대 크기
     public GameObject ending;
+    public AudioSource endingSound;
 
     private Vector3 initialScale; // 오브젝트의 초기 크기
 
@@ -46,5 +47,6 @@ public class Moon : MonoBehaviour
     }
     public void Ending1(){
         ending.SetActive(true);
+        endingSound.Play();
     }
 }
